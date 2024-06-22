@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class CommandLineInterface{
+    executeCmd(command: Command): String
+}
+interface Command{
+    execute(params: String, arguments: String, options: String): String
+}
+
+class ListCommand implements Command{
+    execute():String
+}
+class ChangeDirectoryCommand implements Command{
+    execute():String
+}
+class TouchCommand implements Command{
+    execute():String
+}
+class MakeDirectoryCommand implements Command{
+    execute():String
+}
+class RemoveCommand implements Command{
+    execute():String
+}
+
+interface FileSystem{
+    getName(): String
+    getParentDir(): FileSystem
+    delete(): void
+}
+class File implements FileSystem{
+    name: String
+    parentDir: FileSystem
+
+}
+class Directory implements FileSystem{
+    name: String
+    parentDir: FileSystem
+    child: FileSystem
+}
+CommandLineInterface -> Command
+Command -> FileSystem
+@enduml
