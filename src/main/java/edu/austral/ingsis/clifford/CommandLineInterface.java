@@ -4,9 +4,10 @@ import edu.austral.ingsis.clifford.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CommandLineInterface {
+    private FileSystem fileSystem;
+
     //command [options] [arguments]
     public String executeCmd(String commandLine) {
         String[] commandParts = commandLine.split(" ");
@@ -14,12 +15,12 @@ public class CommandLineInterface {
         CommandBody commandBody = commandBuilder(commandParts);
 
         return switch (cmd) {
-            case "cd" -> new ChangeDirectoryCommand().execute(commandBody);
-            case "ls" -> new ListCommand().execute(commandBody);
-            case "mkdir" -> new MakeDirectoryCommand().execute(commandBody);
-            case "rm" -> new RemoveCommand().execute(commandBody);
-            case "touch" -> new TouchCommand().execute(commandBody);
-            case "pwd" -> new PrintWorkingDirectoryCommand().execute(commandBody);
+            case "cd" -> new ChangeDirectoryCommand(fileSystem).execute(commandBody);
+//            case "ls" -> new ListCommand(fileSystem).execute(commandBody);
+//            case "mkdir" -> new MakeDirectoryCommand().execute(commandBody);
+//            case "rm" -> new RemoveCommand(fileSystem).execute(commandBody);
+//            case "touch" -> new TouchCommand(fileSystem).execute(commandBody);
+//            case "pwd" -> new PrintWorkingDirectoryCommand(fileSystem).execute(commandBody);
             default -> "command not found: " + cmd;
         };
     }
