@@ -11,8 +11,12 @@ public class FileSystem {
     private Directory workingDirectory;
 
     public FileSystem() {
-        this.root = new Directory("/", null);
-        this.workingDirectory = this.root;
+        //TODO change
+        workingDirectory = new Directory("/", null);
+        root = workingDirectory;
+
+//        this.root = new Directory("/", null);
+//        this.workingDirectory = this.root;
     }
 
     public void setWorkingDirectory(Directory workingDirectory) {

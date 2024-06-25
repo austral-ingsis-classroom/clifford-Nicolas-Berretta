@@ -30,11 +30,15 @@ public class RemoveCommand implements Command{
         FileSystemObject object = fileSystem.getWorkingDirectory().getChildByName(name);
 
         if(isDir(object)){
+            if(commandBody.getOptions().isEmpty()){
+                return "cannot remove " + "'" + name + "'" + ", is a directory";
+            }
             String option = commandBody.getOptions().getFirst();
             if(option != null && option.equals("--recursive")){
                 fileSystem.getWorkingDirectory().deleteChild(name);
+            } else {
+                return "unable to remove directory";
             }
-            return "unable to remove directory";
         } else {
             fileSystem.getWorkingDirectory().deleteChild(name);
         }
@@ -44,7 +48,6 @@ public class RemoveCommand implements Command{
     private boolean isDir(FileSystemObject fileSystemObject) {
         return fileSystemObject instanceof Directory;
     }
-
 
     private boolean exists(String name){
         try {

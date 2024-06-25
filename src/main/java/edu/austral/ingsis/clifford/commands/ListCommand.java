@@ -2,6 +2,7 @@ package edu.austral.ingsis.clifford.commands;
 
 import edu.austral.ingsis.clifford.CommandBody;
 import edu.austral.ingsis.clifford.FileSystem;
+import edu.austral.ingsis.clifford.fileSystem.File;
 import edu.austral.ingsis.clifford.fileSystem.FileSystemObject;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class ListCommand implements Command{
     public ListCommand(FileSystem fileSystem) {
         this.fileSystem = fileSystem;
     }
+
     @Override
     public String execute(CommandBody commandBody) {
         if(commandBody.getOptions().size() > 1 || !commandBody.getArguments().isEmpty()){

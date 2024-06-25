@@ -28,12 +28,6 @@ public class Directory implements FileSystemObject {
         this.children.removeIf(child -> child.getName().equals(name));
     }
 
-    public void setParent(Directory parent) {
-        if(this.name.equals("/")) {
-            throw new IllegalArgumentException("cannot assign a parent directory to the root directory.");
-        }
-        this.parent = parent;
-    }
     public FileSystemObject getChildByName(String name) {
         for(FileSystemObject child : children) {
             if(child.getName().equals(name)) {
@@ -49,12 +43,6 @@ public class Directory implements FileSystemObject {
             return (Directory) child;
         }
         throw new IllegalArgumentException("no such directory: " + name);
-    }
-    public void deleteChildByName(String name) {
-        boolean result = children.removeIf(child -> child.getName().equals(name));
-        if(!result) {
-            throw new IllegalArgumentException("no such file or directory: " + name);
-        }
     }
     public List<FileSystemObject> getChildren(){
         return children;

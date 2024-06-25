@@ -5,6 +5,7 @@ import edu.austral.ingsis.clifford.FileSystem;
 import edu.austral.ingsis.clifford.fileSystem.Directory;
 import edu.austral.ingsis.clifford.fileSystem.FileSystemObject;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class ChangeDirectoryCommand implements Command{
@@ -19,22 +20,26 @@ public class ChangeDirectoryCommand implements Command{
         if(commandBody.getArguments().size() != 1){
             return "Invalid amount of arguments.";
         }
-        if(commandBody.getOptions().isEmpty()){
-            return "No options specified.";
+        if(!commandBody.getOptions().isEmpty()){
+            return "unnecessary options";
         }
         String argument = commandBody.getArguments().getFirst();
         switch (argument){
             case "..":
                 Directory parent = fileSystem.getWorkingDirectory().getParentDir();
-                return returnMessage(parent.getName());
-
+                if(parent == null){
+                    fileSystem.setWorkingDirectory(fileSystem.getRoot());
+                    return returnMessage(fileSystem.getRoot().getName());
+                }
+                fileSystem.setWorkingDirectory(parent);
+                break;
             case ".":
                 return argument + "is current directory";
 
             default:
                 try {
                     String[] path = argument.split("/");
-                    if(Objects.equals(path[0], "/")){
+                    if(argument.startsWith("/")){
                         moveIfRoot(path);
                     } else {
                         moveTo(path);
@@ -53,11 +58,10 @@ public class ChangeDirectoryCommand implements Command{
         } catch (Exception e){
             throw new IllegalArgumentException("Invalid path");
         }
-
     }
 
     private String returnMessage(String name){
-        return "moved to directory" + "'" + name + "'";
+        return "moved to directory " + "'" + name + "'";
     }
 
     private void moveTo(String[] path){
@@ -68,7 +72,7 @@ public class ChangeDirectoryCommand implements Command{
                 fileSystem.setWorkingDirectory(object);
             } catch (Exception e) {
                 fileSystem.setWorkingDirectory(currentDirectory);
-                throw new IllegalArgumentException("Invalid directory specified :" + dir);
+                throw new IllegalArgumentException("'" + dir + "'" + " directory does not exist");
             }
         }
     }
