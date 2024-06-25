@@ -8,10 +8,10 @@ public class Directory implements FileSystemObject {
     private Directory parent;
     private final List<FileSystemObject> children;
 
-    public Directory(String name,Directory parent,List<FileSystemObject> children) {
+    public Directory(String name,Directory parent) {
         this.name = name;
         this.parent = parent;
-        this.children = children;
+        this.children = new ArrayList<>();
     }
 
     @Override
@@ -62,5 +62,6 @@ public class Directory implements FileSystemObject {
     public void addChild(FileSystemObject child) {
         children.add(child);
     }
+
 
 }

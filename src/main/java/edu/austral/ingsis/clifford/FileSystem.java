@@ -11,7 +11,7 @@ public class FileSystem {
     private Directory workingDirectory;
 
     public FileSystem() {
-        this.root = new Directory("/", null, null);
+        this.root = new Directory("/", null);
         this.workingDirectory = this.root;
     }
 

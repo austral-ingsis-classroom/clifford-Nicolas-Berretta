@@ -21,7 +21,7 @@ public class MakeDirectoryCommand  implements Command{
             return "invalid directory name, it cannot contain spaces or '/' characters.";
         }
         Directory workingDirectory = fileSystem.getWorkingDirectory();
-        workingDirectory.addChild(new Directory(directory, workingDirectory, null));
+        workingDirectory.addChild(new Directory(directory, workingDirectory));
         return "'" + directory + "' directory created";
     }
 }
