@@ -34,4 +34,33 @@ public class Directory implements FileSystemObject {
         }
         this.parent = parent;
     }
+    public FileSystemObject getChildByName(String name) {
+        for(FileSystemObject child : children) {
+            if(child.getName().equals(name)) {
+                return child;
+            }
+        }
+        throw new IllegalArgumentException("no such file or directory: " + name);
+    }
+    public Directory getDirChildByName(String name) {
+        FileSystemObject child = getChildByName(name);
+
+        if(child instanceof Directory) {
+            return (Directory) child;
+        }
+        throw new IllegalArgumentException("no such directory: " + name);
+    }
+    public void deleteChildByName(String name) {
+        boolean result = children.removeIf(child -> child.getName().equals(name));
+        if(!result) {
+            throw new IllegalArgumentException("no such file or directory: " + name);
+        }
+    }
+    public List<FileSystemObject> getChildren(){
+        return children;
+    }
+    public void addChild(FileSystemObject child) {
+        children.add(child);
+    }
+
 }

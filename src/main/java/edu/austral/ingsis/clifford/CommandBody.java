@@ -16,4 +16,7 @@ public class CommandBody {
     public List<String> getArguments() {
         return arguments;
     }
+    public boolean isEmpty(){
+        return options.isEmpty() && arguments.isEmpty();
+    }
 }
