@@ -44,7 +44,7 @@ public class RemoveCommand implements Command{
     private boolean isDir(FileSystemObject fileSystemObject) {
         return fileSystemObject instanceof Directory;
     }
-    private boolean is
+
 
     private boolean exists(String name){
         try {

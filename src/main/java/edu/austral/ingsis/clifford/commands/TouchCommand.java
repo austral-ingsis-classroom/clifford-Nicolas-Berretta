@@ -30,6 +30,6 @@ public class TouchCommand implements Command {
         return "'" + args.getFirst() + "' file created";
     }
     private boolean notValidArgs(List<String> args){
-        return (arguments.contains(" ") || arguments.contains("/"));
+        return (args.contains(" ") || args.contains("/"));
     }
 }
