@@ -48,8 +48,8 @@ public class ListCommand implements Command{
     private String namesToString(List<String> names) {
         StringBuilder sb = new StringBuilder();
         for (String name : names) {
-            sb.append(name);
+            sb.append(name).append(" ");
         }
-        return sb.toString();
+        return sb.isEmpty() ? "" : sb.substring(0, sb.length() - 1);
     }
 }
