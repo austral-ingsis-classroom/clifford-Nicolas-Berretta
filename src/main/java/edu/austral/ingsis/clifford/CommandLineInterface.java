@@ -16,11 +16,11 @@ public class CommandLineInterface {
 
         return switch (cmd) {
             case "cd" -> new ChangeDirectoryCommand(fileSystem).execute(commandBody);
-//            case "ls" -> new ListCommand(fileSystem).execute(commandBody);
-//            case "mkdir" -> new MakeDirectoryCommand().execute(commandBody);
-//            case "rm" -> new RemoveCommand(fileSystem).execute(commandBody);
-//            case "touch" -> new TouchCommand(fileSystem).execute(commandBody);
-//            case "pwd" -> new PrintWorkingDirectoryCommand(fileSystem).execute(commandBody);
+            case "ls" -> new ListCommand(fileSystem).execute(commandBody);
+            case "mkdir" -> new MakeDirectoryCommand(fileSystem).execute(commandBody);
+            case "rm" -> new RemoveCommand(fileSystem).execute(commandBody);
+            case "touch" -> new TouchCommand(fileSystem).execute(commandBody);
+            case "pwd" -> new PrintWorkingDirectoryCommand(fileSystem).execute(commandBody);
             default -> "command not found: " + cmd;
         };
     }
