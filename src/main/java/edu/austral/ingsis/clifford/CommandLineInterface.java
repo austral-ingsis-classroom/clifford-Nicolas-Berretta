@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandLineInterface {
-    private FileSystem fileSystem;
+    private final FileSystem fileSystem;
 
+    public CommandLineInterface() {
+        this.fileSystem = new FileSystem();
+    }
     //command [options] [arguments]
     public String executeCmd(String commandLine) {
         String[] commandParts = commandLine.split(" ");
@@ -32,7 +35,7 @@ public class CommandLineInterface {
         for (int i = 1; i < commandParts.length; i++) {
             //grabs the first  after the command, if it's an option, it needs to start with -
             // if not, it's only an arg
-            if (commandParts[i].startsWith("-")) {
+            if (commandParts[i].startsWith("--")) {
                 options.add(commandParts[i]);
             } else {
                 arguments.add(commandParts[i]);

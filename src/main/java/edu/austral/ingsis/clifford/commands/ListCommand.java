@@ -16,9 +16,15 @@ public class ListCommand implements Command{
     }
     @Override
     public String execute(CommandBody commandBody) {
-        String option = commandBody.getOptions().getFirst();
+        if(commandBody.getOptions().size() > 1 || !commandBody.getArguments().isEmpty()){
+            return "invalid arguments";
+        }
         List<FileSystemObject> currentDir = fileSystem.getWorkingDirectory().getChildren();
         List<String> names = getNames(currentDir);
+        if(commandBody.getOptions().isEmpty()){
+            return namesToString(names);
+        }
+        String option = commandBody.getOptions().getFirst();
         return switch (option) {
             case "--ord=desc" -> {
                 names.sort(Comparator.reverseOrder());
